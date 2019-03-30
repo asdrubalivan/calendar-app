@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CalendarWrapper = styled.table`
   width: 91vw;
-  height: 90vh;
+  height: 91rem;
   border: 1px solid #f3f3f3;
   font-size: 1.6rem;
   border-collapse: collapse;
@@ -33,6 +33,9 @@ const DayContainerTd = styled.td`
   color: ${props => props.weekend ? 'steelblue' : 'black'};
   position: relative;
   background-color: ${props => props.dayDisabled ? '#f3f3f3' : 'white'};
+  &:hover {
+    background-color: #f3f3f3;
+  }
 `
 
 const DayText = styled.div`
@@ -124,7 +127,7 @@ const DayContainer = ({
   day,
   dayDisabled,
 }) => (
-    <DayContainerTd weekend={weekend} dayDisabled={dayDisabled}>
+    <DayContainerTd colspan="1" weekend={weekend} dayDisabled={dayDisabled}>
       <DayText>{day}</DayText>
       <ReminderContainer>
         {reminders.map(r => <Reminder key={r.id} color={r.color}>
@@ -201,6 +204,9 @@ const Calendar = () => (
         <DayContainer day={31}>31</DayContainer>
         <DayContainer day={1} dayDisabled>1</DayContainer>
         <DayContainer day={2} dayDisabled>2</DayContainer>
+      </WeekContainer>
+      <WeekContainer>
+        <DayContainer day={3}>3</DayContainer>
       </WeekContainer>
     </tbody>
   </CalendarWrapper>
