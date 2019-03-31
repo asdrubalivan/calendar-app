@@ -4,13 +4,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import globalReducer from './reducers/index';
 
 const store = createStore(globalReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>
   , document.getElementById('root'));
 
