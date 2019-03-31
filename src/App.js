@@ -7,6 +7,13 @@ import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import Calendar from './calendar';
 import AddReminderForm from './addreminderform';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem;
+`
 
 class App extends Component {
   componentDidMount() {
@@ -17,7 +24,7 @@ class App extends Component {
       <>
         <GlobalStyle />
         <main>
-          <h1>Calendar App</h1>
+          <Title>Calendar App</Title>
           <nav>
             <Link to="/">Home</Link>
             <Link to="/add-reminder">Add reminder</Link>
