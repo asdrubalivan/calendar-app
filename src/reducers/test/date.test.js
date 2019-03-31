@@ -42,4 +42,9 @@ describe('date reducer', () => {
     expect(secondMonth.calendarDate).toBe('2019-02-01T00:00:00.000Z');
     expect(secondMonth.days).toMatchSnapshot('prev month 2nd');
   });
+  it('works with leap years', () => {
+    const date = '2020-02-01T00:00:00.000Z';
+    const result = reducer(getInitialState(), setDate(date));
+    expect(result.days).toContain('2020-02-29T00:00:00.000Z')
+  })
 });
