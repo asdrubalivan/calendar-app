@@ -21,7 +21,6 @@ const getProcessedReminders = (reminders, days, calendarDate) => {
   if (calendarDate === null) {
     return [];
   }
-  debugger;
   const momentCalendarDate = moment(calendarDate);
   const calendarDateMonth = momentCalendarDate.get('months');
   const isCurrentMonthFn = d => d.get('months') === calendarDateMonth;
