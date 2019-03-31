@@ -4,6 +4,7 @@ import { utc as moment } from 'moment';
 import GlobalStyle from './globalstyle'
 import { setDate } from './reducers/actions';
 import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import Calendar from './calendar';
 import AddReminderForm from './addreminderform';
 
@@ -16,6 +17,11 @@ class App extends Component {
       <>
         <GlobalStyle />
         <main>
+          <h1>Calendar App</h1>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/add-reminder">Add reminder</Link>
+          </nav>
           <Switch>
             <Route exact path="/" component={Calendar} />
             <Route exact path="/add-reminder" component={AddReminderForm} />
