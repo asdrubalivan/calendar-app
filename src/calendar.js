@@ -12,8 +12,8 @@ import {
 
 
 const CalendarWrapper = styled.table`
-  width: 91vw;
-  height: 91rem;
+  width: 100vw;
+  height: 100vh;
   border: 1px solid #f3f3f3;
   font-size: 1.6rem;
   border-collapse: collapse;
