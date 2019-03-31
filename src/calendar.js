@@ -1,5 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import {
+  processedRemindersSelector,
+  currentMonthSelector,
+} from './selectors/calendar'
+import {
+  prevMonth,
+  nextMonth,
+} from './reducers/actions'
+
 
 const CalendarWrapper = styled.table`
   width: 91vw;
@@ -50,63 +60,6 @@ const ReminderContainer = styled.div`
   right: 5%;
 `
 
-const reminders = [
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#f1f1e6',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: 'green',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-  {
-    date: '2019-01-02 12:00:00',
-    reminder: 'blablablablablablablablablabla',
-    color: '#211121',
-    id: 'test', // Esto para identificar los reminders por si borramos alguno etc
-  },
-]
-
 const Reminder = styled.p`
   font-size: 1rem;
   color: ${props => props.color || 'black'};
@@ -125,91 +78,69 @@ const NavButton = styled.button`
 const DayContainer = ({
   weekend,
   day,
-  dayDisabled,
+  isCurrentMonth,
 }) => (
-    <DayContainerTd colspan="1" weekend={weekend} dayDisabled={dayDisabled}>
+    <DayContainerTd colspan="1" weekend={weekend} dayDisabled={!isCurrentMonth}>
       <DayText>{day}</DayText>
       <ReminderContainer>
-        {reminders.map(r => <Reminder key={r.id} color={r.color}>
+        {[].map(r => <Reminder key={r.id} color={r.color}>
           {r.reminder}
         </Reminder>)}
       </ReminderContainer>
     </DayContainerTd>
   );
 
-const Calendar = () => (
-  <CalendarWrapper>
-    <thead>
-      <HeaderRow>
-        <th>
-          <NavButton>{"«"}</NavButton>
-        </th>
-        <th colspan="5">Mars 2019</th>
-        <th>
-          <NavButton>{"»"}</NavButton>
-        </th>
-      </HeaderRow>
-      <DayHeaderRow>
-        <DayHeaderContainer>Sunday</DayHeaderContainer>
-        <DayHeaderContainer>Monday</DayHeaderContainer>
-        <DayHeaderContainer>Tuesday</DayHeaderContainer>
-        <DayHeaderContainer>Wednesday</DayHeaderContainer>
-        <DayHeaderContainer>Thursday</DayHeaderContainer>
-        <DayHeaderContainer>Friday</DayHeaderContainer>
-        <DayHeaderContainer>Saturday</DayHeaderContainer>
-      </DayHeaderRow>
-    </thead>
-    <tbody>
-      <WeekContainer>
-        <DayContainer day={30} weekend dayDisabled></DayContainer>
-        <DayContainer day={31} dayDisabled>31</DayContainer>
-        <DayContainer day={1}></DayContainer>
-        <DayContainer day={2}>2</DayContainer>
-        <DayContainer day={3}>3</DayContainer>
-        <DayContainer day={4}>4</DayContainer>
-        <DayContainer day={5}>5</DayContainer>
-      </WeekContainer>
-      <WeekContainer>
-        <DayContainer day={6}>6</DayContainer>
-        <DayContainer day={7}>7</DayContainer>
-        <DayContainer day={8}>8</DayContainer>
-        <DayContainer day={9}>9</DayContainer>
-        <DayContainer day={10}>10</DayContainer>
-        <DayContainer day={11}>11</DayContainer>
-        <DayContainer day={12}>12</DayContainer>
-      </WeekContainer>
-      <WeekContainer>
-        <DayContainer day={13}>13</DayContainer>
-        <DayContainer day={14}>14</DayContainer>
-        <DayContainer day={15}>15</DayContainer>
-        <DayContainer day={16}>16</DayContainer>
-        <DayContainer day={17}>17</DayContainer>
-        <DayContainer day={18}>18</DayContainer>
-        <DayContainer day={19}>19</DayContainer>
-      </WeekContainer>
-      <WeekContainer>
-        <DayContainer day={20}>20</DayContainer>
-        <DayContainer day={21}>21</DayContainer>
-        <DayContainer day={22}>22</DayContainer>
-        <DayContainer day={23}>23</DayContainer>
-        <DayContainer day={24}>24</DayContainer>
-        <DayContainer day={25}>25</DayContainer>
-        <DayContainer day={26}>26</DayContainer>
-      </WeekContainer>
-      <WeekContainer>
-        <DayContainer day={27}>27</DayContainer>
-        <DayContainer day={28}>28</DayContainer>
-        <DayContainer day={29}>29</DayContainer>
-        <DayContainer day={30}>30</DayContainer>
-        <DayContainer day={31}>31</DayContainer>
-        <DayContainer day={1} dayDisabled>1</DayContainer>
-        <DayContainer day={2} dayDisabled>2</DayContainer>
-      </WeekContainer>
-      <WeekContainer>
-        <DayContainer day={3}>3</DayContainer>
-      </WeekContainer>
-    </tbody>
-  </CalendarWrapper>
-);
+const Calendar = ({
+  reminders,
+  currentMonth,
+  prevMonth,
+  nextMonth }) => (
+    <CalendarWrapper>
+      <thead>
+        <HeaderRow>
+          <th>
+            <NavButton onClick={prevMonth}>{"«"}</NavButton>
+          </th>
+          <th colspan="5">{currentMonth}</th>
+          <th>
+            <NavButton onClick={nextMonth}>{"»"}</NavButton>
+          </th>
+        </HeaderRow>
+        <DayHeaderRow>
+          <DayHeaderContainer>Sunday</DayHeaderContainer>
+          <DayHeaderContainer>Monday</DayHeaderContainer>
+          <DayHeaderContainer>Tuesday</DayHeaderContainer>
+          <DayHeaderContainer>Wednesday</DayHeaderContainer>
+          <DayHeaderContainer>Thursday</DayHeaderContainer>
+          <DayHeaderContainer>Friday</DayHeaderContainer>
+          <DayHeaderContainer>Saturday</DayHeaderContainer>
+        </DayHeaderRow>
+      </thead>
+      <tbody>
+        {reminders.map(r =>
+          <WeekContainer key={r.week}>
+            {r.days.map(d =>
+              <DayContainer
+                key={d.formattedDay}
+                weekend={d.isWeekend}
+                isCurrentMonth={d.isCurrentMonth}
+                day={d.formattedDay}
+                reminders={d.reminders} />
+            )}
+          </WeekContainer>
+        )}
+      </tbody>
+    </CalendarWrapper>
+  );
 
-export default Calendar;
+const mapStateToProps = state => ({
+  reminders: processedRemindersSelector(state),
+  currentMonth: currentMonthSelector(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  prevMonth: () => dispatch(prevMonth()),
+  nextMonth: () => dispatch(nextMonth()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

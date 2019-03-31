@@ -2,6 +2,7 @@ export const ADD_REMINDER = 'ADD_REMINDER';
 export const EDIT_REMINDER = 'EDIT_REMINDER';
 export const NEXT_MONTH = 'NEXT_MONTH';
 export const PREV_MONTH = 'PREV_MONTH';
+export const SET_DATE = 'SET_DATE';
 
 export const addReminder = ({ color, reminder, date }) => ({
   date,
@@ -25,3 +26,8 @@ export const nextMonth = () => ({
 export const prevMonth = () => ({
   type: PREV_MONTH,
 });
+
+export const setDate = (date) => ({
+  date,
+  type: SET_DATE,
+})
