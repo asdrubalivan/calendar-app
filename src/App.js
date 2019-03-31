@@ -15,6 +15,32 @@ const Title = styled.h1`
   margin: 2rem;
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  text-transform: capitalize;
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.6rem;
+  border: 1px solid steelblue;
+  border-radius: 3%;
+  &:hover {
+    background-color: #f3f3f3;
+  }
+  &, &:visited, &:active {
+    color: black;
+  }
+`
+
+const Nav = styled.nav`
+  margin-bottom: 3rem;
+  padding-left: 1rem;
+`
+
 class App extends Component {
   componentDidMount() {
     this.props.setDate();
@@ -25,10 +51,10 @@ class App extends Component {
         <GlobalStyle />
         <main>
           <Title>Calendar App</Title>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/add-reminder">Add reminder</Link>
-          </nav>
+          <Nav>
+            <StyledLink to="/">Home</StyledLink>
+            <StyledLink to="/add-reminder">Add reminder</StyledLink>
+          </Nav>
           <Switch>
             <Route exact path="/" component={Calendar} />
             <Route exact path="/add-reminder" component={AddReminderForm} />
