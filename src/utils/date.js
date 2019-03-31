@@ -21,10 +21,12 @@ export const getDaysMonth = (date) => {
       weeks.push(week);
     }
   }
+  const year = firstDay.get('years');
   return weeks.reduce((arr, w) => {
-    const firstWeekDay = moment().week(w).day(0);
-    const lastWeekDay = moment().week(w).day(6);
-    return arr.concat([...ISOStringRange(firstWeekDay, lastWeekDay)]);
+    const firstWeekDay = moment().years(year).week(w).day(0);
+    const lastWeekDay = moment().years(year).week(w).day(6);
+    const isoRange = [...ISOStringRange(firstWeekDay, lastWeekDay)];
+    return arr.concat(isoRange);
   }, []);
 };
 
