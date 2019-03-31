@@ -21,12 +21,13 @@ const getProcessedReminders = (reminders, days, calendarDate) => {
   if (calendarDate === null) {
     return [];
   }
+  debugger;
   const momentCalendarDate = moment(calendarDate);
   const calendarDateMonth = momentCalendarDate.get('months');
-  const formattedDate = momentCalendarDate.format('YYYY-MM-DD');
   const isCurrentMonthFn = d => d.get('months') === calendarDateMonth;
   const mappedDays = days.map(d => {
     const momentDay = moment(d);
+    const formattedDate = momentDay.format('YYYY-MM-DD');
     const isCurrentMonth = isCurrentMonthFn(momentDay);
     const isWeekend = isWeekendFn(momentDay);
     const remindersForDay = isCurrentMonth ?
