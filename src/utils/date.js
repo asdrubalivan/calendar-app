@@ -50,3 +50,21 @@ export const getPrevMonth = date => {
   const prevMonthDate = moment(date).subtract(1, 'months');
   return getDaysMonth(prevMonthDate);
 }
+
+const manipulateTimezone = method => values => {
+  if (!values) {
+    return values;
+  }
+  const { date } = values;
+  const m = moment(date);
+  const offset = (new Date()).getTimezoneOffset();
+  m[method](offset, 'minutes');
+  return {
+    ...values,
+    date: m.toISOString(),
+  };
+}
+
+export const getValuesCorrectTimezone = manipulateTimezone('subtract');
+
+export const convertBackToTimezone = manipulateTimezone('add');
