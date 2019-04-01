@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import Calendar from './calendar';
 import AddReminderForm from './addreminderform';
+import EditReminderForm from './editreminderform';
 import styled from 'styled-components';
 
 const Title = styled.h1`
@@ -63,6 +64,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Calendar} />
             <Route exact path="/add-reminder" component={AddReminderForm} />
+            <Route exact path="/edit-reminder/:id" component={EditReminderForm} />
           </Switch>
         </main>
       </>
