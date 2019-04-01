@@ -10,7 +10,8 @@ const Label = styled.label`
 `
 
 const Group = styled.div`
-  max-width: 35rem;
+  width: 35rem;
+  height: 3.5rem;
   margin-right: auto;
   margin-left: auto;
   &:not(:last-child) {
@@ -22,10 +23,25 @@ const MyDatePicker = styled(Datepicker)`
   display: inline-block;
 `
 
-const Column = styled.div`
-  width: 10rem;
+const ColumnBase = styled.div`
   display: inline-block;
+  vertical-align: top;
 `
+
+const Column = styled(ColumnBase)`
+  width: 20rem;
+`
+
+const LabelColumn = styled(ColumnBase)`
+  width: 10rem;
+`
+
+const SmallColumn = styled.div`
+  width: 3.5rem;
+  display: inline-block;
+  height: 100%;
+`
+
 
 const ErrorMessage = styled.p`
   text-align: center;
@@ -40,55 +56,63 @@ const SubmitButton = styled.button`
 
 const FORMAT_DATE_PICKER = 'yyyy-MM-dd p';
 
-const ReminderForm = ({ errors, touched, isSubmitting, isValid }) => (
-  <Form>
-    <Group>
-      <Column>
-        <Label htmlFor="reminder">Reminder</Label>
-      </Column>
-      <Column>
-        <Field name="reminder" />
-      </Column>
-    </Group>
-    {errors.reminder && touched.reminder && <Group>
-      <ErrorMessage>
-        {errors.reminder}
-      </ErrorMessage>
-    </Group>}
-    <Group>
-      <Column>
-        <Label htmlFor="color">Color</Label>
-      </Column>
-      <Column>
-        <Field name="color" />
-      </Column>
-    </Group>
-    {errors.color && touched.color && <Group>
-      <ErrorMessage>
-        {errors.color}
-      </ErrorMessage>
-    </Group>}
-    <Group>
-      <Column>
-        <Label htmlFor="date">Date</Label>
-      </Column>
-      <Column>
-        <MyDatePicker
-          showTimeSelect
-          dateFormat={FORMAT_DATE_PICKER}
-          required={true}
-          name="date" />
-      </Column>
-    </Group>
-    {errors.date && touched.date && <Group>
-      <ErrorMessage>
-        {errors.date}
-      </ErrorMessage>
-    </Group>}
-    <Group>
-      <SubmitButton disabled={isSubmitting || !isValid} type="submit">Create reminder</SubmitButton>
-    </Group>
-  </Form>
-);
+const ReminderForm = ({
+  errors,
+  touched,
+  isSubmitting,
+  isValid,
+  values,
+  submitText,
+}) => (
+    <Form>
+      <Group>
+        <LabelColumn>
+          <Label htmlFor="reminder">Reminder</Label>
+        </LabelColumn>
+        <Column>
+          <Field name="reminder" />
+        </Column>
+      </Group>
+      {errors.reminder && touched.reminder && <Group>
+        <ErrorMessage>
+          {errors.reminder}
+        </ErrorMessage>
+      </Group>}
+      <Group>
+        <LabelColumn>
+          <Label htmlFor="color">Color</Label>
+        </LabelColumn>
+        <Column>
+          <Field name="color" />
+        </Column>
+        <SmallColumn style={{ backgroundColor: !errors.color && values.color }} />
+      </Group>
+      {errors.color && touched.color && <Group>
+        <ErrorMessage>
+          {errors.color}
+        </ErrorMessage>
+      </Group>}
+      <Group>
+        <LabelColumn>
+          <Label htmlFor="date">Date</Label>
+        </LabelColumn>
+        <Column>
+          <MyDatePicker
+            showTimeSelect
+            dateFormat={FORMAT_DATE_PICKER}
+            required={true}
+            name="date" />
+        </Column>
+      </Group>
+      {errors.date && touched.date && <Group>
+        <ErrorMessage>
+          {errors.date}
+        </ErrorMessage>
+      </Group>}
+      <Group>
+        <SubmitButton disabled={isSubmitting || !isValid} type="submit">{submitText}</SubmitButton>
+      </Group>
+    </Form>
+  );
 
 export default ReminderForm;
