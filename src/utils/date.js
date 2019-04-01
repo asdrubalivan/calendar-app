@@ -67,4 +67,4 @@ const manipulateTimezone = method => values => {
 
 export const getValuesCorrectTimezone = manipulateTimezone('subtract');
 
-export const convertBackToTimezone = manipulateTimezone('add');
+export const addTimezone = manipulateTimezone('add');
