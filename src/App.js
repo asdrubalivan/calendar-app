@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const Title = styled.h1`
   text-align: center;
   font-size: 2rem;
-  margin: 2rem;
+  margin: 5rem;
 `
 
 const StyledLink = styled(Link)`
@@ -39,7 +39,12 @@ const StyledLink = styled(Link)`
 const Nav = styled.nav`
   margin-bottom: 3rem;
   padding-left: 1rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 `
+
 
 class App extends Component {
   componentDidMount() {
