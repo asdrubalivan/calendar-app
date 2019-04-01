@@ -5,7 +5,7 @@ import { editReminder } from './reducers/actions'
 import ReminderForm from './reminderform';
 import { validationSchema, Title } from './utils/reminderform';
 import { Redirect } from 'react-router-dom';
-import { getValuesCorrectTimezone, addTimezone } from './utils/date';
+import { subtractTimezone, addTimezone } from './utils/date';
 
 class EditReminderForm extends Component {
   onSubmit = (values) => {
@@ -50,7 +50,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  onSubmit: (values) => dispatch(editReminder(props.match.params.id, getValuesCorrectTimezone(values))),
+  onSubmit: (values) => dispatch(editReminder(props.match.params.id, subtractTimezone(values))),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditReminderForm);
