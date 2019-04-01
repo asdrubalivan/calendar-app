@@ -60,7 +60,7 @@ const ReminderContainer = styled.div`
   right: 5%;
 `
 
-const Reminder = styled.p`
+const Reminder = styled.small`
   font-size: 1rem;
   color: ${props => props.color || 'black'};
   cursor: pointer;
@@ -84,12 +84,12 @@ const DayContainer = ({
 }) => (
     <DayContainerTd colspan="1" weekend={weekend} dayDisabled={!isCurrentMonth}>
       <DayText>{day}</DayText>
-      <ReminderContainer>
+      {reminders.length > 0 && <ReminderContainer>
         {reminders.map(r =>
           <Reminder key={r.id} color={r.color}>
             {r.reminder}
           </Reminder>)}
-      </ReminderContainer>
+      </ReminderContainer>}
     </DayContainerTd>
   );
 
@@ -104,7 +104,7 @@ const Calendar = ({
           <th>
             <NavButton onClick={prevMonth}>{"«"}</NavButton>
           </th>
-          <th colspan="5">{currentMonth}</th>
+          <th colSpan="5">{currentMonth}</th>
           <th>
             <NavButton onClick={nextMonth}>{"»"}</NavButton>
           </th>
