@@ -21,14 +21,48 @@ const validationSchema = Yup.object().shape({
   date: Yup.date().required('A date is required'),
 });
 
-const ColorDiv = styled.div`
-  width: 1rem;
+const Title = styled.h2`
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 1.8rem;
+`
+
+const Label = styled.label`
+  font-size: 1.6rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+`
+
+const Group = styled.div`
+  max-width: 35rem;
+  margin-right: auto;
+  margin-left: auto;
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+`
+
+const MyDatePicker = styled(Datepicker)`
   display: inline-block;
 `
 
-const FORMAT_DATE_PICKER = 'yyyy-MM-dd p';
+const Column = styled.div`
+  width: 10rem;
+  display: inline-block;
+`
 
-const getColor = (color, errors) => !errors ? color : 'white';
+const ErrorMessage = styled.p`
+  text-align: center;
+  color: red;
+  font-size: 1.2rem;
+`
+
+const SubmitButton = styled.button`
+  margin-left: 10rem;
+  width: 19.1rem;
+`
+
+const FORMAT_DATE_PICKER = 'yyyy-MM-dd p';
 
 class AddReminderForm extends Component {
   onSubmit = (values) => {
@@ -41,36 +75,68 @@ class AddReminderForm extends Component {
       color: '#000000',
     }
     return (
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={this.onSubmit}>
-        {({ errors,
-          touched,
-          values,
-          isSubmitting,
-          isValid,
-        }) => (
-            <Form>
-              <label htmlFor="reminder">Reminder</label>
-              <Field name="reminder" />
-              {errors.reminder && touched.reminder && <p>{errors.reminder}</p>}
-              <label htmlFor="color">Color</label>
-              <Field name="color" />
-              <ColorDiv style={{ backgroundColor: getColor(values.color, errors.color) }} />
-              {errors.color && touched.color && <p>{errors.color}</p>}
-              <label htmlFor="date">Date</label>
-              <Datepicker
-                showTimeSelect
-                dateFormat={FORMAT_DATE_PICKER}
-                required={true}
-                onChange={(ev) => console.log('change', ev)}
-                name="date" />
-              {errors.date && touched.date && <p>{errors.date}</p>}
-              <button disabled={isSubmitting || !isValid} type="submit">Create reminder</button>
-            </Form>
-          )}
-      </Formik>
+      <>
+        <Title>Add new reminder</Title>
+        <Formik
+          validationSchema={validationSchema}
+          initialValues={initialValues}
+          onSubmit={this.onSubmit}>
+          {({ errors,
+            touched,
+            isSubmitting,
+            isValid,
+          }) => (
+              <Form>
+                <Group>
+                  <Column>
+                    <Label htmlFor="reminder">Reminder</Label>
+                  </Column>
+                  <Column>
+                    <Field name="reminder" />
+                  </Column>
+                </Group>
+                {errors.reminder && touched.reminder && <Group>
+                  <ErrorMessage>
+                    {errors.reminder}
+                  </ErrorMessage>
+                </Group>}
+                <Group>
+                  <Column>
+                    <Label htmlFor="color">Color</Label>
+                  </Column>
+                  <Column>
+                    <Field name="color" />
+                  </Column>
+                </Group>
+                {errors.color && touched.color && <Group>
+                  <ErrorMessage>
+                    {errors.color}
+                  </ErrorMessage>
+                </Group>}
+                <Group>
+                  <Column>
+                    <Label htmlFor="date">Date</Label>
+                  </Column>
+                  <Column>
+                    <MyDatePicker
+                      showTimeSelect
+                      dateFormat={FORMAT_DATE_PICKER}
+                      required={true}
+                      name="date" />
+                  </Column>
+                </Group>
+                {errors.date && touched.date && <Group>
+                  <ErrorMessage>
+                    {errors.date}
+                  </ErrorMessage>
+                </Group>}
+                <Group>
+                  <SubmitButton disabled={isSubmitting || !isValid} type="submit">Create reminder</SubmitButton>
+                </Group>
+              </Form>
+            )}
+        </Formik>
+      </>
     );
   }
 }
