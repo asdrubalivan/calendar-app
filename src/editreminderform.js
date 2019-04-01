@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { addReminder } from './reducers/actions'
-import { utc as moment } from 'moment';
+import { editReminder } from './reducers/actions'
 import ReminderForm from './reminderform';
 import { validationSchema, Title } from './utils/reminderform';
+import { Redirect } from 'react-router-dom';
+import { getValuesCorrectTimezone, convertBackToTimezone } from './utils/date';
 
 class EditReminderForm extends Component {
   onSubmit = (values) => {
@@ -12,26 +13,30 @@ class EditReminderForm extends Component {
     this.props.history.push('/');
   }
   render() {
-    const initialValues = {
-      reminder: '',
-      color: '#000000',
+    const { reminder } = this.props;
+    if (!reminder) {
+      return <Redirect to="/" />;
     }
     return (
       <>
-        <Title>Add new reminder</Title>
+        {JSON.stringify(reminder)}
+        <Title>Edit Reminder</Title>
         <Formik
           validationSchema={validationSchema}
-          initialValues={initialValues}
+          initialValues={{ ...reminder }}
           onSubmit={this.onSubmit}>
           {({ errors,
             touched,
             isSubmitting,
             isValid,
+            values,
           }) => (
               <ReminderForm errors={errors}
                 touched={touched}
                 isSubmitting={isSubmitting}
                 isValid={isValid}
+                values={values}
+                submitText="Edit reminder"
               />
             )}
         </Formik>
@@ -40,13 +45,12 @@ class EditReminderForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (values) => {
-    const m = moment(values.date);
-    m.subtract(values.date.getTimezoneOffset(), 'minutes')
-    values.date = m.toISOString();
-    dispatch(addReminder(values))
-  },
+const mapStateToProps = (state, props) => ({
+  reminder: convertBackToTimezone(state.reminders.find(r => r.id === props.match.params.id)),
 });
 
-export default connect(null, mapDispatchToProps)(EditReminderForm);
+const mapDispatchToProps = (dispatch, props) => ({
+  onSubmit: (values) => dispatch(editReminder(props.match.params.id, getValuesCorrectTimezone(values))),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditReminderForm);

@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { addReminder } from './reducers/actions'
 import { utc as moment } from 'moment';
 import ReminderForm from './reminderform';
-import { validationSchema, Title } from './utils/reminderform';
+import { validationSchema, Title } from './utils/reminderform'
 
 class AddReminderForm extends Component {
   onSubmit = (values) => {
@@ -27,11 +27,14 @@ class AddReminderForm extends Component {
             touched,
             isSubmitting,
             isValid,
+            values,
           }) => (
               <ReminderForm errors={errors}
                 touched={touched}
                 isSubmitting={isSubmitting}
                 isValid={isValid}
+                values={values}
+                submitText="Add new reminder"
               />
             )}
         </Formik>
