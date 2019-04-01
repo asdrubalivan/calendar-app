@@ -9,6 +9,7 @@ import {
   prevMonth,
   nextMonth,
 } from './reducers/actions'
+import { Link } from 'react-router-dom';
 
 
 const CalendarWrapper = styled.table`
@@ -43,6 +44,7 @@ const DayContainerTd = styled.td`
   color: ${props => props.weekend ? 'steelblue' : 'black'};
   position: relative;
   background-color: ${props => props.dayDisabled ? '#f3f3f3' : 'white'};
+  transition: .3s background-color ease-out;
   &:hover {
     background-color: #f3f3f3;
   }
@@ -60,10 +62,16 @@ const ReminderContainer = styled.div`
   right: 5%;
 `
 
-const Reminder = styled.small`
+const Reminder = styled(Link)`
   font-size: 1rem;
   color: ${props => props.color || 'black'};
   cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: .2s transform ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `
 
 const NavButton = styled.button`
@@ -86,7 +94,7 @@ const DayContainer = ({
       <DayText>{day}</DayText>
       {reminders.length > 0 && <ReminderContainer>
         {reminders.map(r =>
-          <Reminder key={r.id} color={r.color}>
+          <Reminder key={r.id} color={r.color} to={`/edit-reminder/${r.id}`}>
             {r.reminder}
           </Reminder>)}
       </ReminderContainer>}
