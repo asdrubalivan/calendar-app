@@ -10,6 +10,7 @@ import {
   nextMonth,
 } from '../reducers/actions'
 import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 
 const CalendarWrapper = styled.table`
@@ -30,8 +31,11 @@ const DayHeaderRow = styled(HeaderRow)`
   color: white;
 `
 
-const DayHeaderContainer = styled.th`
+const DayHeaderContainerBase = styled.th`
   width: 14.2857%;
+  @media (max-width: 700px) {
+    text-align: left;
+  }
 `
 
 
@@ -83,6 +87,17 @@ const NavButton = styled.button`
     background-color: #f3f3f3;
   }
 `
+
+const DayHeaderContainer = ({ children }) => (
+  <DayHeaderContainerBase>
+    <MediaQuery query="(min-width: 701px)">
+      {children}
+    </MediaQuery>
+    <MediaQuery query="(max-width: 700px)">
+      {children.slice(0, 2)}
+    </MediaQuery>
+  </DayHeaderContainerBase>
+);
 
 const DayContainer = ({
   weekend,
