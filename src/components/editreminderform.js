@@ -7,7 +7,7 @@ import { validationSchema, Title } from '../utils/reminderform';
 import { Redirect } from 'react-router-dom';
 import { subtractTimezone, addTimezone } from '../utils/date';
 
-class EditReminderForm extends Component {
+export class EditReminderForm extends Component {
   onSubmit = (values) => {
     this.props.onSubmit(values);
     this.props.history.push('/');
@@ -19,7 +19,6 @@ class EditReminderForm extends Component {
     }
     return (
       <>
-        {JSON.stringify(reminder)}
         <Title>Edit Reminder</Title>
         <Formik
           validationSchema={validationSchema}
