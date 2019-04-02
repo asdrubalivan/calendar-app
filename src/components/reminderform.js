@@ -101,6 +101,7 @@ const ReminderForm = ({
             showTimeSelect
             dateFormat={FORMAT_DATE_PICKER}
             required={true}
+            value={values.date}
             name="date" />
         </Column>
       </Group>
