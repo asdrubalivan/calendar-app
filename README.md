@@ -1,10 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Calendar App
+
+## Quick start
+
+Either go to [netlify](https://friendly-pike-c848c6.netlify.com/) or run the following:
+
+1. `yarn install`
+1. `yarn start`.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -12,57 +19,71 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the tests for the app
 
-### `npm run build`
+### `yarn build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Deployed versions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A deployed version from the app is deployed [here](https://friendly-pike-c848c6.netlify.com/)
 
-### `npm run eject`
+## Instructions of use
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To add a reminder on the main page click on the button *Add Reminder*.
+Fill the fields:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Reminder
+1. Color (Use an hexadecimal code for the color)
+1. Date
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Click on the *Add new reminder button*
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Once a reminder is created, it will be shown in the calendar in the date that this reminder was configured. To edit, simply click on the reminder and edit the fields mentioned above as you wish.
 
-## Learn More
+## Folder structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+.
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── README.md
+├── src
+│   ├── App.js                                 // Global component
+│   ├── components
+│   │   ├── addreminderform.js
+│   │   ├── calendar.js
+│   │   ├── editreminderform.js
+│   │   ├── reminderform.js
+│   │   └── __tests__
+│   │       ├── addreminderform.test.js        // Tests for add reminder component
+│   │       └── editreminderform.test.js       // Tests for edit reminder component
+│   ├── globalstyle.js                         // Used to insert global styles in the app
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reducers
+│   │   ├── actions.js                         // Common actions
+│   │   ├── calendar.js                        // Calendar reducer
+│   │   ├── index.js                           // Global reducer
+│   │   ├── reminder.js                        // Reminder reducer
+│   │   └── __tests__
+│   │       ├── date.test.js
+│   │       ├── reminder.test.js
+│   │       └── __snapshots__
+│   │           └── date.test.js.snap
+│   ├── selectors                              // Calculates props based on redux status
+│   │   └── calendar.js
+│   ├── serviceWorker.js
+│   ├── setupTests.js
+│   └── utils
+│       ├── date.js
+│       └── reminderform.js
+└── yarn.lock
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
