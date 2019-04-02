@@ -7,6 +7,7 @@ const Label = styled.label`
   font-size: 1.6rem;
   margin-right: 1rem;
   margin-left: 1rem;
+  line-height: 3.5rem;
 `
 
 const Group = styled.div`
@@ -25,7 +26,12 @@ const MyDatePicker = styled(Datepicker)`
 
 const ColumnBase = styled.div`
   display: inline-block;
+  height: 100%;
   vertical-align: top;
+  input, .form-element, .datePicker-wrapper, .react-datepicker-wrapper, .react-datepicker__input-container {
+    height: 100%;
+    width: 17rem;
+  }
 `
 
 const Column = styled(ColumnBase)`
@@ -50,8 +56,12 @@ const ErrorMessage = styled.p`
 `
 
 const SubmitButton = styled.button`
-  margin-left: 10rem;
-  width: 19.1rem;
+  width: 17rem;
+  padding: .5rem;
+`
+
+const StyledForm = styled(Form)`
+  padding: 1rem;
 `
 
 const FORMAT_DATE_PICKER = 'yyyy-MM-dd p';
@@ -64,7 +74,7 @@ const ReminderForm = ({
   values,
   submitText,
 }) => (
-    <Form>
+    <StyledForm>
       <Group>
         <LabelColumn>
           <Label htmlFor="reminder">Reminder</Label>
@@ -111,9 +121,14 @@ const ReminderForm = ({
         </ErrorMessage>
       </Group>}
       <Group>
-        <SubmitButton disabled={isSubmitting || !isValid} type="submit">{submitText}</SubmitButton>
+        <LabelColumn />
+        <Column>
+          <SubmitButton
+            disabled={isSubmitting || !isValid}
+            type="submit">{submitText}</SubmitButton>
+        </Column>
       </Group>
-    </Form>
+    </StyledForm>
   );
 
 export default ReminderForm;
