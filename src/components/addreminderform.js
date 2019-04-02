@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { addReminder } from './reducers/actions'
+import { addReminder } from '../reducers/actions'
 import { utc as moment } from 'moment';
 import ReminderForm from './reminderform';
-import { validationSchema, Title } from './utils/reminderform'
+import { validationSchema, Title } from '../utils/reminderform'
 
 class AddReminderForm extends Component {
   onSubmit = (values) => {

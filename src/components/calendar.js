@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import {
   processedRemindersSelector,
   currentMonthSelector,
-} from './selectors/calendar'
+} from '../selectors/calendar'
 import {
   prevMonth,
   nextMonth,
-} from './reducers/actions'
+} from '../reducers/actions'
 import { Link } from 'react-router-dom';
 
 

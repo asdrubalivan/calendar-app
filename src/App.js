@@ -5,9 +5,9 @@ import GlobalStyle from './globalstyle'
 import { setDate } from './reducers/actions';
 import { Switch, Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import Calendar from './calendar';
-import AddReminderForm from './addreminderform';
-import EditReminderForm from './editreminderform';
+import Calendar from './components/calendar';
+import AddReminderForm from './components/addreminderform';
+import EditReminderForm from './components/editreminderform';
 import styled from 'styled-components';
 
 const Title = styled.h1`

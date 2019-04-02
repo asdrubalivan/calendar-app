@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { editReminder } from './reducers/actions'
+import { editReminder } from '../reducers/actions'
 import ReminderForm from './reminderform';
-import { validationSchema, Title } from './utils/reminderform';
+import { validationSchema, Title } from '../utils/reminderform';
 import { Redirect } from 'react-router-dom';
-import { subtractTimezone, addTimezone } from './utils/date';
+import { subtractTimezone, addTimezone } from '../utils/date';
 
 class EditReminderForm extends Component {
   onSubmit = (values) => {
