@@ -6,7 +6,7 @@ import { utc as moment } from 'moment';
 import ReminderForm from './reminderform';
 import { validationSchema, Title } from '../utils/reminderform'
 
-class AddReminderForm extends Component {
+export class AddReminderForm extends Component {
   onSubmit = (values) => {
     this.props.onSubmit(values);
     this.props.history.push('/');
