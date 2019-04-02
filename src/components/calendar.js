@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 import {
   processedRemindersSelector,
   currentMonthSelector,
-} from './selectors/calendar'
+} from '../selectors/calendar'
 import {
   prevMonth,
   nextMonth,
-} from './reducers/actions'
+} from '../reducers/actions'
+import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 
 const CalendarWrapper = styled.table`
-  width: 91vw;
-  height: 91rem;
+  width: 100vw;
+  height: 100vh;
   border: 1px solid #f3f3f3;
   font-size: 1.6rem;
   border-collapse: collapse;
@@ -29,8 +31,11 @@ const DayHeaderRow = styled(HeaderRow)`
   color: white;
 `
 
-const DayHeaderContainer = styled.th`
+const DayHeaderContainerBase = styled.th`
   width: 14.2857%;
+  @media (max-width: 700px) {
+    text-align: left;
+  }
 `
 
 
@@ -43,6 +48,7 @@ const DayContainerTd = styled.td`
   color: ${props => props.weekend ? 'steelblue' : 'black'};
   position: relative;
   background-color: ${props => props.dayDisabled ? '#f3f3f3' : 'white'};
+  transition: .3s background-color ease-out;
   &:hover {
     background-color: #f3f3f3;
   }
@@ -60,9 +66,16 @@ const ReminderContainer = styled.div`
   right: 5%;
 `
 
-const Reminder = styled.p`
+const Reminder = styled(Link)`
   font-size: 1rem;
   color: ${props => props.color || 'black'};
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: .2s transform ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `
 
 const NavButton = styled.button`
@@ -75,18 +88,31 @@ const NavButton = styled.button`
   }
 `
 
+const DayHeaderContainer = ({ children }) => (
+  <DayHeaderContainerBase>
+    <MediaQuery query="(min-width: 701px)">
+      {children}
+    </MediaQuery>
+    <MediaQuery query="(max-width: 700px)">
+      {children.slice(0, 2)}
+    </MediaQuery>
+  </DayHeaderContainerBase>
+);
+
 const DayContainer = ({
   weekend,
   day,
   isCurrentMonth,
+  reminders,
 }) => (
     <DayContainerTd colspan="1" weekend={weekend} dayDisabled={!isCurrentMonth}>
       <DayText>{day}</DayText>
-      <ReminderContainer>
-        {[].map(r => <Reminder key={r.id} color={r.color}>
-          {r.reminder}
-        </Reminder>)}
-      </ReminderContainer>
+      {reminders.length > 0 && <ReminderContainer>
+        {reminders.map(r =>
+          <Reminder key={r.id} color={r.color} to={`/edit-reminder/${r.id}`}>
+            {r.reminder}
+          </Reminder>)}
+      </ReminderContainer>}
     </DayContainerTd>
   );
 
@@ -101,7 +127,7 @@ const Calendar = ({
           <th>
             <NavButton onClick={prevMonth}>{"«"}</NavButton>
           </th>
-          <th colspan="5">{currentMonth}</th>
+          <th colSpan="5">{currentMonth}</th>
           <th>
             <NavButton onClick={nextMonth}>{"»"}</NavButton>
           </th>
