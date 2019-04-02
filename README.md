@@ -31,6 +31,19 @@ Builds the app for production to the `build` folder.
 
 A deployed version from the app is deployed [here](https://friendly-pike-c848c6.netlify.com/)
 
+## Instructions of use
+
+To add a reminder on the main page click on the button *Add Reminder*.
+Fill the fields:
+
+1. Reminder
+1. Color (Use an hexadecimal code for the color)
+1. Date
+
+Click on the *Add new reminder button*
+
+Once a reminder is created, it will be shown in the calendar in the date that this reminder was configured. To edit, simply click on the reminder and edit the fields mentioned above as you wish.
+
 ## Folder structure
 
 ```
